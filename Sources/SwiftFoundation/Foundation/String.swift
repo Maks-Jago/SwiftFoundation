@@ -11,6 +11,10 @@ public extension String {
     func capitalizingFirstLetter() -> String {
         prefix(1).capitalized + dropFirst()
     }
+    
+    func toData(using: Encoding = .utf8) -> Data? {
+        self.data(using: using)
+    }
 }
 
 // MARK: - Identifiable

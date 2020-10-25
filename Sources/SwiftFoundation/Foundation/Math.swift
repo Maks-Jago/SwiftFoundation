@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 func ceilCGF(_ value: CGFloat) -> CGFloat {
     CGFloat(ceilf(Float(value)))

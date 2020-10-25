@@ -10,9 +10,18 @@ import Foundation
 #if os(iOS)
 import MobileCoreServices
 
+public enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+    case head = "HEAD"
+    case patch = "PATCH"
+}
+
 public extension URLRequest {
     
-    public init(url: URL,
+    init(url: URL,
          method: HTTPMethod = .post,
          headers: [String: String] = [:],
          multipartFormData constructingBlock: @escaping (_ formData: MultipartFormData) -> Void)
@@ -29,7 +38,7 @@ public extension URLRequest {
         }
     }
     
-    open class MultipartFormData {
+    class MultipartFormData {
         public var request: URLRequest
         private lazy var boundary: String = {
             return String(format: "%08X%08X", arc4random(), arc4random())
@@ -40,9 +49,9 @@ public extension URLRequest {
         }
         
         public func append(value: String, name: String) {
-            request.httpBody?.append("--\(boundary)\r\n".data())
-            request.httpBody?.append("Content-Disposition: form-data; name=\"\(name)\"\r\n\r\n".data())
-            request.httpBody?.append("\(value)\r\n".data())
+            request.httpBody?.append("--\(boundary)\r\n".toData()!)
+            request.httpBody?.append("Content-Disposition: form-data; name=\"\(name)\"\r\n\r\n".toData()!)
+            request.httpBody?.append("\(value)\r\n".toData()!)
         }
         
         public func append(filePath: String, name: String) throws {
@@ -62,16 +71,16 @@ public extension URLRequest {
         }
         
         public func append(file: Data, name: String, fileName: String, mimeType: String) {
-            request.httpBody?.append("--\(boundary)\r\n".data())
-            request.httpBody?.append("Content-Disposition: form-data; name=\"\(name)\";".data())
-            request.httpBody?.append("filename=\"\(fileName)\"\r\n".data())
-            request.httpBody?.append("Content-Type: \(mimeType)\r\n\r\n".data())
+            request.httpBody?.append("--\(boundary)\r\n".toData()!)
+            request.httpBody?.append("Content-Disposition: form-data; name=\"\(name)\";".toData()!)
+            request.httpBody?.append("filename=\"\(fileName)\"\r\n".toData()!)
+            request.httpBody?.append("Content-Type: \(mimeType)\r\n\r\n".toData()!)
             request.httpBody?.append(file)
-            request.httpBody?.append("\r\n".data())
+            request.httpBody?.append("\r\n".toData()!)
         }
         
         fileprivate func finalize() {
-            request.httpBody?.append("--\(boundary)--\r\n".data())
+            request.httpBody?.append("--\(boundary)--\r\n".toData()!)
             request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         }
     }
