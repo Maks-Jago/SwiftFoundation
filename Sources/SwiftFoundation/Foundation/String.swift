@@ -35,3 +35,10 @@ public extension String {
         return String(data: data, encoding: .utf8)
     }
 }
+
+// MARK: - Format
+public extension String {
+    func format(parameters: CVarArg...) -> String {
+        return String(format: self, arguments: parameters)
+    }
+}
