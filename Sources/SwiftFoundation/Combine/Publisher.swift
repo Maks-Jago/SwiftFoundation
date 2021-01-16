@@ -8,7 +8,7 @@
 import Combine
 
 public extension Publisher {
-    func sink(receiveError: @escaping ((Self.Failure) -> Void), receiveValue: @escaping ((Self.Output) -> Void)) -> AnyCancellable {
+    func sinkError(_ receiveError: @escaping ((Self.Failure) -> Void), receiveValue: @escaping ((Self.Output) -> Void)) -> AnyCancellable {
         self.sink(receiveCompletion: { compl in
             if case let .failure(error) = compl {
                 receiveError(error)
