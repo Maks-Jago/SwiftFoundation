@@ -7,7 +7,7 @@
 
 import Combine
 
-public extension AnyPublisher {
+public extension Publishers {
     struct ZipMany<Element, F: Error>: Publisher {
         public typealias Output = [Element]
         public typealias Failure = F
