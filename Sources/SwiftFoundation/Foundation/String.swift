@@ -17,6 +17,14 @@ public extension String {
     }
 }
 
+public extension String {
+    func evaluate(withRegex regex: String) -> Bool {
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: self)
+    }
+}
+
+
 // MARK: - Identifiable
 extension String: Identifiable {
     public var id: String { self }
