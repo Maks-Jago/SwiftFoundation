@@ -31,3 +31,23 @@ public extension Array {
         }
     }
 }
+
+public extension Array where Element: Equatable {
+    mutating func toogle(_ item: Element) {
+        if self.contains(item) {
+            self.removeAll { $0 == item }
+        } else {
+            self.append(item)
+        }
+    }
+    
+    mutating func toogled(_ item: Element) -> Self {
+        if self.contains(item) {
+            self.removeAll { $0 == item }
+        } else {
+            self.append(item)
+        }
+        
+        return self
+    }
+}
