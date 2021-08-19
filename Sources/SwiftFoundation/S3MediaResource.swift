@@ -97,3 +97,27 @@ public extension S3MediaResource {
         }
     }
 }
+
+// MARK: - Equatable
+extension S3MediaResource: Equatable {
+    public static func == (lhs: S3MediaResource, rhs: S3MediaResource) -> Bool {
+        lhs.mediaUrlPath == rhs.mediaUrlPath && lhs.id == rhs.id
+    }
+}
+
+// MARK: - Hashable
+extension S3MediaResource: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(mediaUrlPath)
+    }
+}
+
+// MARK: - Faking
+extension S3MediaResource: Faking {
+    public init() {
+        id = .init(value: .random(in: 0...Int.max))
+        mediaUrlPath = "https://www.urlaunched.com/ms-icon-310x310.png"
+        configs = Self.defaultConfigs!
+    }
+}
