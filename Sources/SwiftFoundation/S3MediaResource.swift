@@ -11,6 +11,10 @@ import struct CoreGraphics.CGSize
 public struct S3MediaResource {
     public struct Id: Hashable {
         var value: Int
+
+        public init(_ value: Int) {
+            self.value = value
+        }
     }
 
     public var id: Id
@@ -116,7 +120,7 @@ extension S3MediaResource: Hashable {
 // MARK: - Faking
 extension S3MediaResource: Faking {
     public init() {
-        id = .init(value: .random(in: 0...Int.max))
+        id = .init(.random(in: 0...Int.max))
         mediaUrlPath = "https://www.urlaunched.com/ms-icon-310x310.png"
         configs = Self.defaultConfigs!
     }
