@@ -8,8 +8,8 @@
 import Foundation
 import struct CoreGraphics.CGSize
 
-public struct S3MediaResource {
-    public struct Id: Hashable {
+public struct S3MediaResource: Codable {
+    public struct Id: Hashable, Codable {
         var value: Int
 
         public init(_ value: Int) {
@@ -91,7 +91,7 @@ public extension S3MediaResource {
 
 // MARK: - Configs
 public extension S3MediaResource {
-    struct Configs {
+    struct Configs: Codable {
         public var bucketName: String
         public var cdnBaseURLPath: String
 
