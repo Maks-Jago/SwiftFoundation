@@ -12,7 +12,7 @@ public extension Publisher {
     func decodeUnwrap<Item: Decodable>(type: Item.Type) -> Publishers.Map<Publishers.Decode<Self, UnwrapContainer<Item>, JSONDecoder>, Item> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        self.decode(type: type, decoder: decoder, unwrapBy: "")
+        return self.decode(type: type, decoder: decoder, unwrapBy: "")
     }
     
     func decodeUnwrap<Item: Decodable, Coder: UnwrapDecoder>(
@@ -28,7 +28,7 @@ public extension Publisher {
     ) -> Publishers.Map<Publishers.Decode<Self, UnwrapContainer<Item>, JSONDecoder>, Item> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        self.decode(type: type, decoder: decoder, unwrapBy: key)
+        return self.decode(type: type, decoder: decoder, unwrapBy: key)
     }
     
     func decode<Item: Decodable, Coder: UnwrapDecoder>(
