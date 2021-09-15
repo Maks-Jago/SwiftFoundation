@@ -8,7 +8,11 @@
 import CoreLocation
 
 public extension CLLocation {
-    
+
+    var isValid: Bool {
+        CLLocationCoordinate2DIsValid(coordinate)
+    }
+
     var isZero: Bool {
         self.coordinate.latitude == 0 && self.coordinate.longitude == 0
     }

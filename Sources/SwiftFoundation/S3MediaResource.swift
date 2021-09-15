@@ -117,6 +117,8 @@ extension S3MediaResource: Hashable {
     }
 }
 
+extension S3MediaResource: Identifiable {}
+
 // MARK: - Faking
 extension S3MediaResource: Faking {
     public init() {
