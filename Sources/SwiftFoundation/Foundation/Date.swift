@@ -20,6 +20,10 @@ public extension Date {
         Calendar.current.startOfDay(for: self)
     }
     
+    func dateByAdding(days: Int) -> Date {
+        Calendar.current.date(byAdding: .day, value: days, to: self) ?? self
+    }
+    
     var noon: Date {
         Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
