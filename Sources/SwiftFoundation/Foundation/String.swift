@@ -50,3 +50,14 @@ public extension String {
         return String(format: self, arguments: parameters)
     }
 }
+
+//MARK: - Slice Including
+extension String {
+    func sliceIncluding(from: String, to: String) -> String? {
+        return (range(of: from)?.lowerBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.upperBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
+    }
+}
