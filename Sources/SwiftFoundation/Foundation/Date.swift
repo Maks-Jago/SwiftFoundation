@@ -20,16 +20,29 @@ public extension Date {
         Calendar.current.startOfDay(for: self)
     }
     
-    func dateByAdding(days: Int) -> Date {
-        Calendar.current.date(byAdding: .day, value: days, to: self) ?? self
-    }
-    
     var noon: Date {
         Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
     
+    var day: Int {
+        Calendar.current.component(.day,  from: self)
+    }
+    
     var month: Int {
         Calendar.current.component(.month,  from: self)
+    }
+    
+    var startOfMonth: Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: self)
+        return calendar.date(from: components)!
+    }
+    
+    var endOfMonth: Date {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth)!
     }
     
     var isLastDayOfMonth: Bool {
@@ -41,6 +54,10 @@ public extension Date {
         var result = Calendar.current.date(bySetting: .hour, value: timeComponents.hour ?? 0, of: self) ?? self
         result = Calendar.current.date(bySetting: .minute, value: timeComponents.minute ?? 0, of: result) ?? result
         return result
+    }
+    
+    func daysDiff(from dateFrom: Date) -> Int {
+        abs(Calendar.current.dateComponents([.day], from: dateFrom, to: self).day ?? 0)
     }
     
     enum ComponentToAdd {
