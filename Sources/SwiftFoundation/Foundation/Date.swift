@@ -42,4 +42,75 @@ public extension Date {
         result = Calendar.current.date(bySetting: .minute, value: timeComponents.minute ?? 0, of: result) ?? result
         return result
     }
+    
+    enum ComponentToAdd {
+        case seconds(Int)
+        case minutes(Int)
+        case hours(Int)
+        case days(Int)
+        case weeks(Int)
+        case months(Int)
+        case years(Int)
+        
+        var dict: (key: Calendar.Component, value: Int) {
+            switch self {
+            case .seconds(let value):
+                return (.second, value)
+            case .minutes(let value):
+                return (.minute, value)
+            case .hours(let value):
+                return (.hour, value)
+            case .days(let value):
+                return (.day, value)
+            case .weeks(let value):
+                return (.day, value * 7)
+            case .months(let value):
+                return (.month, value)
+            case .years(let value):
+                return (.year, value)
+            }
+        }
+        
+        static func from(components: DateComponents) -> [ComponentToAdd] {
+            var result: [ComponentToAdd] = []
+            
+            if let years = components.year, years != 0 {
+                result.append(.years(years))
+            }
+            if let months = components.month, months != 0 {
+                result.append(.months(months))
+            }
+            if let days = components.day, days != 0 {
+                result.append(.days(days))
+            }
+            if let hours = components.hour, hours != 0 {
+                result.append(.hours(hours))
+            }
+            if let minutes = components.minute, minutes != 0 {
+                result.append(.minutes(minutes))
+            }
+            if let seconds = components.second, seconds != 0 {
+                result.append(.seconds(seconds))
+            }
+            
+            return result
+        }
+    }
+    
+    func add(_ component: ComponentToAdd, to: Date? = nil) -> Date {
+        let toDate = to ?? self
+        return Calendar.current.date(byAdding: component.dict.key, value: component.dict.value, to: toDate) ?? toDate
+    }
+    
+    func add(_ components: [ComponentToAdd]) -> Date {
+        var date = self
+        for component in components {
+            date = add(component, to: date)
+        }
+        return date
+    }
+    
+    func add(_ components: ComponentToAdd...) -> Date {
+        add(components)
+    }
 }
