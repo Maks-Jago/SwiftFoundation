@@ -51,3 +51,32 @@ public extension Array where Element: Equatable {
         return self
     }
 }
+
+public extension Array where Element: Equatable {
+    mutating func removeFirst(_ element: Element) -> Element? {
+        if let index = self.firstIndex(of: element) {
+            return self.remove(at: index)
+        }
+        return nil
+    }
+}
+
+public extension Array {
+    subscript(safeIndex index: Int) -> Element? {
+        guard index >= 0, index < endIndex else {
+            return nil
+        }
+
+        return self[index]
+    }
+}
+
+public extension Array {
+    func toDictionary<T>(_ keyPath: KeyPath<Element, T>) -> [T: Element] {
+        self.reduce( [T: Element]() ) { (dict, element) -> [T : Element] in
+            var dict = dict
+            dict[element[keyPath: keyPath]] = element
+            return dict
+        }
+    }
+}

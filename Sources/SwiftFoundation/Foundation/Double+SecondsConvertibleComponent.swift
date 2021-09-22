@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
     enum SecondsConvertibleComponent {
         case minutes, hours, days
     }
