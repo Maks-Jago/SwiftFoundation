@@ -118,7 +118,11 @@ public extension Date {
         }
     }
     
-    func add(_ component: ComponentToAdd, to: Date? = nil) -> Date {
+    func add(_ component: ComponentToAdd) -> Date {
+        Calendar.current.date(byAdding: component.dict.key, value: component.dict.value, to: self) ?? self
+    }
+    
+    private func add(_ component: ComponentToAdd, to: Date? = nil) -> Date {
         let toDate = to ?? self
         return Calendar.current.date(byAdding: component.dict.key, value: component.dict.value, to: toDate) ?? toDate
     }
