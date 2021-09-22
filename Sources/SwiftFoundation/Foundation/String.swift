@@ -52,12 +52,24 @@ public extension String {
 }
 
 //MARK: - Slice Including
-extension String {
+public extension String {
     func sliceIncluding(from: String, to: String) -> String? {
         return (range(of: from)?.lowerBound).flatMap { substringFrom in
             (range(of: to, range: substringFrom..<endIndex)?.upperBound).map { substringTo in
                 String(self[substringFrom..<substringTo])
             }
+        }
+    }
+}
+
+public extension String {
+    func convertHtml() -> NSAttributedString? {
+        guard let data = data(using: .utf8) else { return nil }
+
+        if let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
+            return attributedString
+        } else {
+            return nil
         }
     }
 }
