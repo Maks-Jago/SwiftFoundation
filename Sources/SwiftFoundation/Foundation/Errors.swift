@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct SomeError: LocalizedError {
+public struct SomeError: LocalizedError {
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         return NSLocalizedString("Some error occurred. Please try again later", comment: "Some error occurred")
     }
 }
 
-struct CustomError: LocalizedError {
+public struct CustomError: LocalizedError {
     var text: String?
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         return text ?? ""
     }
 }
