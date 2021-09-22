@@ -10,7 +10,7 @@ import Foundation
 struct SomeError: LocalizedError {
     
     var errorDescription: String? {
-        return "Some error occurred. Please try again later"
+        return NSLocalizedString("Some error occurred. Please try again later", comment: "Some error occurred")
     }
 }
 
