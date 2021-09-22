@@ -11,4 +11,8 @@ public extension Numeric {
     var formattedWithSeparator: String {
         Formatter.withSeparator.string(for: self) ?? ""
     }
+    
+    var roundingDownWithSeparator: String {
+        Formatter.roundingDownWithSeparator.string(for: self) ?? ""
+    }
 }

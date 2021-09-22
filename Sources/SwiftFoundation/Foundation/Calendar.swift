@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Calendar {
+public extension Calendar {
     func generateDates(
         inside interval: DateInterval,
         matching components: DateComponents

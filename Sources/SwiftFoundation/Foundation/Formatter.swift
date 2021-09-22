@@ -18,4 +18,15 @@ public extension Formatter {
         formatter.numberStyle = .decimal
         return formatter
     }()
+    
+    static let roundingDownWithSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = ","
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .decimal
+        formatter.roundingMode = .down
+        return formatter
+    }()
 }
