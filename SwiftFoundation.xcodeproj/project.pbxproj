@@ -50,6 +50,7 @@
 		508320602545FFCA00DC7EF6 /* URLRequest+Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5083205F2545FFCA00DC7EF6 /* URLRequest+Multipart.swift */; };
 		8278330526FB22D50008252A /* Double+SecondsConvertibleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278330426FB22D50008252A /* Double+SecondsConvertibleComponent.swift */; };
 		8278330726FB328D0008252A /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278330626FB328C0008252A /* Bundle.swift */; };
+		8278331826FB75FF0008252A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278331726FB75FF0008252A /* Errors.swift */; };
 		OBJ_30 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_41 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SwiftFoundationTests.swift */; };
 		OBJ_42 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* XCTestManifests.swift */; };
@@ -103,6 +104,7 @@
 		5083205F2545FFCA00DC7EF6 /* URLRequest+Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Multipart.swift"; sourceTree = "<group>"; };
 		8278330426FB22D50008252A /* Double+SecondsConvertibleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+SecondsConvertibleComponent.swift"; sourceTree = "<group>"; };
 		8278330626FB328C0008252A /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		8278331726FB75FF0008252A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		OBJ_12 /* SwiftFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFoundationTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_17 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				5083205F2545FFCA00DC7EF6 /* URLRequest+Multipart.swift */,
 				8278330426FB22D50008252A /* Double+SecondsConvertibleComponent.swift */,
 				8278330626FB328C0008252A /* Bundle.swift */,
+				8278331726FB75FF0008252A /* Errors.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				50831FD72545F89D00DC7EF6 /* IndexedCollection.swift in Sources */,
 				508320102545FCBA00DC7EF6 /* AnyPublisher+ZipMany.swift in Sources */,
 				50831FEC2545F96A00DC7EF6 /* CNMutablePostalAddress.swift in Sources */,
+				8278331826FB75FF0008252A /* Errors.swift in Sources */,
 				50831FF22545F99000DC7EF6 /* ObservableObjectPublisher.swift in Sources */,
 				508320442545FDE500DC7EF6 /* NSSortDescriptor.swift in Sources */,
 				50831FFE2545F9F600DC7EF6 /* Publishers+VideoThumb.swift in Sources */,
