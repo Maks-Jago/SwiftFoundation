@@ -52,6 +52,12 @@
 		8278330526FB22D50008252A /* Double+SecondsConvertibleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278330426FB22D50008252A /* Double+SecondsConvertibleComponent.swift */; };
 		8278330726FB328D0008252A /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278330626FB328C0008252A /* Bundle.swift */; };
 		8278331826FB75FF0008252A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278331726FB75FF0008252A /* Errors.swift */; };
+		8278332526FBC37B0008252A /* EquatableNoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332326FBC37B0008252A /* EquatableNoop.swift */; };
+		8278332626FBC37B0008252A /* HashableNoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332426FBC37B0008252A /* HashableNoop.swift */; };
+		8278332A26FBC38B0008252A /* Faking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332826FBC38B0008252A /* Faking.swift */; };
+		8278332B26FBC38B0008252A /* SafetyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332926FBC38B0008252A /* SafetyStorage.swift */; };
+		8278332E26FBC3D90008252A /* S3MediaResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332D26FBC3D90008252A /* S3MediaResource.swift */; };
+		8278333126FBC3E40008252A /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278333026FBC3E40008252A /* CGSize.swift */; };
 		OBJ_30 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_41 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SwiftFoundationTests.swift */; };
 		OBJ_42 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* XCTestManifests.swift */; };
@@ -107,6 +113,12 @@
 		8278330426FB22D50008252A /* Double+SecondsConvertibleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+SecondsConvertibleComponent.swift"; sourceTree = "<group>"; };
 		8278330626FB328C0008252A /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		8278331726FB75FF0008252A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		8278332326FBC37B0008252A /* EquatableNoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableNoop.swift; sourceTree = "<group>"; };
+		8278332426FBC37B0008252A /* HashableNoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableNoop.swift; sourceTree = "<group>"; };
+		8278332826FBC38B0008252A /* Faking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faking.swift; sourceTree = "<group>"; };
+		8278332926FBC38B0008252A /* SafetyStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafetyStorage.swift; sourceTree = "<group>"; };
+		8278332D26FBC3D90008252A /* S3MediaResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3MediaResource.swift; sourceTree = "<group>"; };
+		8278333026FBC3E40008252A /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		OBJ_12 /* SwiftFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFoundationTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_17 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -185,6 +197,40 @@
 			path = CoreLocation;
 			sourceTree = "<group>";
 		};
+		8278332226FBC37B0008252A /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				8278332326FBC37B0008252A /* EquatableNoop.swift */,
+				8278332426FBC37B0008252A /* HashableNoop.swift */,
+			);
+			path = PropertyWrappers;
+			sourceTree = "<group>";
+		};
+		8278332726FBC38B0008252A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8278332826FBC38B0008252A /* Faking.swift */,
+				8278332926FBC38B0008252A /* SafetyStorage.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8278332C26FBC3D90008252A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8278332D26FBC3D90008252A /* S3MediaResource.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8278332F26FBC3E40008252A /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				8278333026FBC3E40008252A /* CGSize.swift */,
+			);
+			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
 		OBJ_10 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +280,10 @@
 		OBJ_8 /* SwiftFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				8278332F26FBC3E40008252A /* CoreGraphics */,
+				8278332C26FBC3D90008252A /* Domain */,
+				8278332726FBC38B0008252A /* Protocols */,
+				8278332226FBC37B0008252A /* PropertyWrappers */,
 				50831F4C2545F2EF00DC7EF6 /* Combine */,
 				50831FE02545F91700DC7EF6 /* CoreLocation */,
 				50831F4D2545F2F400DC7EF6 /* Foundation */,
@@ -334,8 +384,10 @@
 			files = (
 				50831FA72545F52C00DC7EF6 /* Dictionary+Request.swift in Sources */,
 				50831FD12545F85300DC7EF6 /* Numeric.swift in Sources */,
+				8278332E26FBC3D90008252A /* S3MediaResource.swift in Sources */,
 				50831F9B2545F4D300DC7EF6 /* String.swift in Sources */,
 				5083205A2545FEDE00DC7EF6 /* Dictionary.swift in Sources */,
+				8278332626FBC37B0008252A /* HashableNoop.swift in Sources */,
 				508320342545FDA200DC7EF6 /* Int.swift in Sources */,
 				50831FE22545F92600DC7EF6 /* CLLocation.swift in Sources */,
 				8278330526FB22D50008252A /* Double+SecondsConvertibleComponent.swift in Sources */,
@@ -346,6 +398,7 @@
 				508320602545FFCA00DC7EF6 /* URLRequest+Multipart.swift in Sources */,
 				509C917526FB9655005D290C /* AnyCodable.swift in Sources */,
 				50831FAD2545F55F00DC7EF6 /* Data+Unwrap.swift in Sources */,
+				8278332B26FBC38B0008252A /* SafetyStorage.swift in Sources */,
 				50831FD72545F89D00DC7EF6 /* IndexedCollection.swift in Sources */,
 				508320102545FCBA00DC7EF6 /* AnyPublisher+ZipMany.swift in Sources */,
 				50831FEC2545F96A00DC7EF6 /* CNMutablePostalAddress.swift in Sources */,
@@ -354,14 +407,17 @@
 				508320442545FDE500DC7EF6 /* NSSortDescriptor.swift in Sources */,
 				50831FFE2545F9F600DC7EF6 /* Publishers+VideoThumb.swift in Sources */,
 				50831FB32545F58400DC7EF6 /* KeyedDecodingContainer.swift in Sources */,
+				8278333126FBC3E40008252A /* CGSize.swift in Sources */,
 				50831F4F2545F30300DC7EF6 /* Publisher.swift in Sources */,
 				5083203A2545FDB800DC7EF6 /* JSONDecoder.swift in Sources */,
 				50831F952545F49700DC7EF6 /* Date.swift in Sources */,
 				50831FF82545F9B700DC7EF6 /* PassthroughSubject.swift in Sources */,
+				8278332A26FBC38B0008252A /* Faking.swift in Sources */,
 				50831FC52545F80100DC7EF6 /* Formatter.swift in Sources */,
 				508320502545FE8800DC7EF6 /* Array.swift in Sources */,
 				50831FA12545F4F100DC7EF6 /* Calendar.swift in Sources */,
 				5083202A2545FD8600DC7EF6 /* Encodable.swift in Sources */,
+				8278332526FBC37B0008252A /* EquatableNoop.swift in Sources */,
 				5083204A2545FE2200DC7EF6 /* URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
