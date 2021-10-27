@@ -19,11 +19,15 @@ public struct StorableValue<T: Codable> {
         self.defaultValue = defaultValue
         self.storage = storage
         self.inMemoryValue = defaultValue
-        self.inMemoryValue = self.wrappedValue
+        self.inMemoryValue = (try? storage.load(key: key)) ?? defaultValue
     }
 
-    public var wrappedValue: T {
-        get { (try? storage.load(key: key)) ?? defaultValue }
+    public init<K: RawRepresentable>(key: K, defaultValue: T, storage: SafetyStorage) where K.RawValue == String {
+        self.init(key: key.rawValue, defaultValue: defaultValue, storage: storage)
+    }
+
+    public var wrappedValue: T  {
+        get { inMemoryValue }
         set {
             inMemoryValue = newValue
             try? storage.save(newValue, key: key)
@@ -31,13 +35,7 @@ public struct StorableValue<T: Codable> {
     }
 }
 
-extension StorableValue: Equatable where T: Equatable {
-    public static func == (lhs: StorableValue<T>, rhs: StorableValue<T>) -> Bool {
-        lhs.key == rhs.key &&
-        lhs.inMemoryValue == rhs.inMemoryValue &&
-        lhs.defaultValue == rhs.defaultValue
-    }
-}
+extension StorableValue: Equatable where T: Equatable {}
 
 @available(*, deprecated, message: "Use `StorableValue` instead of SafetyValue")
 @propertyWrapper
