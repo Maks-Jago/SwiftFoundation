@@ -21,3 +21,9 @@ public extension Faking {
         fakeItems(count: 1).first!
     }
 }
+
+public extension Faking where Self: RawRepresentable & CaseIterable {
+    init() {
+        self = Self.allCases.randomElement()!
+    }
+}
