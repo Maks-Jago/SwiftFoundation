@@ -10,7 +10,7 @@ import struct CoreGraphics.CGSize
 
 public struct S3MediaResource: Codable {
     public struct Id: Hashable, Codable {
-        var value: Int
+        public var value: Int
 
         public init(_ value: Int) {
             self.value = value
