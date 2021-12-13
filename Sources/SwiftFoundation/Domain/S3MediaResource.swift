@@ -58,8 +58,8 @@ public struct S3MediaResource: Codable {
                 """
                 "edits": {
                 "resize": {
-                "width": \(size.width),
-                "height": \(size.height),
+                "width": \(Int(size.width)),
+                "height": \(Int(size.height)),
                 "fit": "cover"
                 }
                 }
