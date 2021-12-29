@@ -31,6 +31,7 @@ public extension Faking where Self: RawRepresentable & CaseIterable {
 public func fake() { }
 public func fake<T>(_ with: T) { }
 public func fake<T: Faking>() -> T { T.fakeItem() }
+public func fake<T: Faking>() -> T? { T.fakeItem() }
 public func fake<T: Faking>() -> [T] { T.fakeItems() }
 public func fake<T: Faking, ID>(_ id: ID) -> T { T.fakeItem() }
 public func fake<T: Faking>(_ count: Int) -> [T] { T.fakeItems(count: count) }
