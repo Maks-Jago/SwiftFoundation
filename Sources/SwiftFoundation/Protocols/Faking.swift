@@ -35,3 +35,4 @@ public func fake<T: Faking>() -> T? { T.fakeItem() }
 public func fake<T: Faking>() -> [T] { T.fakeItems() }
 public func fake<T: Faking, ID>(_ id: ID) -> T { T.fakeItem() }
 public func fake<T: Faking>(_ count: Int) -> [T] { T.fakeItems(count: count) }
+public func fake<T: Faking & Identifiable>(_ type: T.Type) -> [T.ID] { T.fakeItems().map(\.id) }
