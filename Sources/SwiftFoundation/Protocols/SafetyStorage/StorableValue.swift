@@ -19,7 +19,7 @@ public struct StorableValue<T: Codable> {
         self.defaultValue = defaultValue
         self.storage = storage
         self.inMemoryValue = defaultValue
-        self.inMemoryValue = (try? storage.load(key: key)) ?? defaultValue
+        self.wrappedValue = (try? storage.load(key: key)) ?? defaultValue
     }
 
     public init<K: RawRepresentable>(key: K, defaultValue: T, storage: SafetyStorage) where K.RawValue == String {
