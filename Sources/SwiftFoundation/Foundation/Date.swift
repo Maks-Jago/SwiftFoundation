@@ -20,7 +20,7 @@ public extension Date {
         Calendar.current.startOfDay(for: self)
     }
 
-    var endOfDay: Date {
+    var endOfDay: Date? {
         let components = DateComponents(hour: 23, minute: 59, second: 59)
         return Calendar.current.date(byAdding: components, to: startOfDay)
     }
