@@ -84,3 +84,14 @@ public extension Array {
 public extension Array where Element: Identifiable {
     var ids: [Element.ID] { map(\.id) }
 }
+
+
+public extension Array {
+    func mutate(_ mutation: (_ element: inout Element) -> Void) -> [Element] {
+        map { element in
+            var mutableElement = element
+            mutation(&mutableElement)
+            return mutableElement
+        }
+    }
+}
