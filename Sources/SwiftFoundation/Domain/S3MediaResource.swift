@@ -39,7 +39,24 @@ public struct S3MediaResource: Codable {
         self.configs = mediaConfigs
     }
 
-    public func imageURL(fitIn size: CGSize? = nil) throws -> URL {
+    /// Get an original image URL, without size compression
+    /// - Returns: Original URL (CDN, S3)
+    public func originalImageURL() throws -> URL {
+        try _imageURL(fitIn: nil)
+    }
+
+    /// Get an scaled image URL
+    /// - Parameter size: Target size for image resizing. Size will be scaled with a device scale factor. Example CGSize(width: 120, height: 120).scaledSize
+    /// - Returns: Scaled image URL (CDN, S3).
+    public func scaledImageURL(fitIn size: CGSize) throws -> URL {
+        try _imageURL(fitIn: size.scaledSize)
+    }
+
+    public func imageURL(fitIn size: CGSize) throws -> URL {
+        try _imageURL(fitIn: size)
+    }
+
+    private func _imageURL(fitIn size: CGSize?) throws -> URL {
         guard let mediaURL = URL(string: mediaUrlPath) else {
             throw MediaResourceError.invalidMediaURL
         }
