@@ -52,10 +52,6 @@ public struct S3MediaResource: Codable {
         try _imageURL(fitIn: size.scaledSize)
     }
 
-    public func imageURL(fitIn size: CGSize) throws -> URL {
-        try _imageURL(fitIn: size)
-    }
-
     private func _imageURL(fitIn size: CGSize?) throws -> URL {
         guard let mediaURL = URL(string: mediaUrlPath) else {
             throw MediaResourceError.invalidMediaURL
