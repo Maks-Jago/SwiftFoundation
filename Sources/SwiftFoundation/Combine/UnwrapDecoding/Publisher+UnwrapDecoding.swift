@@ -9,14 +9,14 @@ import Foundation
 import Combine
 
 public extension Publisher {
-    @available(*, deprecated, message: "User decode funcs with unwrap key instead.")
+    @available(*, deprecated, message: "Use decode funcs with unwrap key instead.")
     func decodeUnwrap<Item: Decodable>(type: Item.Type) -> Publishers.Map<Publishers.Decode<Self, UnwrapContainer<Item>, JSONDecoder>, Item> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return self.decode(type: type, decoder: decoder, unwrapBy: "")
     }
     
-    @available(*, deprecated, message: "User decode funcs with unwrap key instead.")
+    @available(*, deprecated, message: "Use decode funcs with unwrap key instead.")
     func decodeUnwrap<Item: Decodable, Coder: UnwrapDecoder>(
         type: Item.Type,
         decoder: Coder
