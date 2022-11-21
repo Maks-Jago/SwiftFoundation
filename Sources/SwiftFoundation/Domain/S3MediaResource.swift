@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import struct CoreGraphics.CGSize
 
 public struct S3MediaResource: Codable {
@@ -42,17 +43,18 @@ public struct S3MediaResource: Codable {
     /// Get an original image URL, without size compression
     /// - Returns: Original URL (CDN, S3)
     public func originalImageURL() throws -> URL {
-        try _imageURL(fitIn: nil)
+        try _imageURL(.fit, in: nil)
     }
 
     /// Get an scaled image URL
+    /// - Parameter contentMode: A flag indicating whether this image should fit or fill the parent context.
     /// - Parameter size: Target size for image resizing. Size will be scaled with a device scale factor. Example CGSize(width: 120, height: 120).scaledSize
     /// - Returns: Scaled image URL (CDN, S3).
-    public func scaledImageURL(fitIn size: CGSize) throws -> URL {
-        try _imageURL(fitIn: size.scaledSize)
+    public func scaledImageURL(_ contentMode: ContentMode = .fit, in size: CGSize) throws -> URL {
+        try _imageURL(contentMode, in: size.scaledSize)
     }
 
-    private func _imageURL(fitIn size: CGSize?) throws -> URL {
+    private func _imageURL(_ contentMode: ContentMode, in size: CGSize?) throws -> URL {
         guard let mediaURL = URL(string: mediaUrlPath) else {
             throw MediaResourceError.invalidMediaURL
         }
@@ -73,7 +75,8 @@ public struct S3MediaResource: Codable {
                 "resize": {
                 "width": \(Int(size.width)),
                 "height": \(Int(size.height)),
-                "fit": "cover"
+                "fit": "\(contentMode == .fit ? "contain" : "cover")",
+                "background": { "r": 255, "g": 255, "b": 255, "alpha": 0 }
                 }
                 }
                 """
