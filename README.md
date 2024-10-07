@@ -1,209 +1,139 @@
-# SwiftFoundation
+# SwiftUIKit
 
-SwiftFoundation is a collection of useful extensions and utilities for the Swift programming language. This library provides a variety of enhancements to existing Swift types, making common tasks more convenient and efficient. It also includes features for working with URLs, HTTP requests, date and time formatting, encoding/decoding, and more.
+SwiftUIKit is a collection of useful extensions and utilities for SwiftUI. This library enhances SwiftUI development by providing a variety of view modifiers, UIKit wrappers, and additional functionalities. It includes components for handling UI appearance, user interactions, and more.
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Extensions](#extensions)
-  - [Array](#array)
-  - [Bool](#bool)
-  - [Bundle](#bundle)
-  - [Calendar](#calendar)
-  - [CharacterSet](#characterset)
-  - [CLLocation](#cllocation)
-  - [CNMutablePostalAddress](#cnmutablepostaladdress)
-  - [CodingUserInfoKey](#codinguserinfokey)
-  - [Data](#data)
-  - [Date](#date)
-  - [DateFormatter](#dateformatter)
-  - [Dictionary](#dictionary)
-  - [Double](#double)
-  - [Encodable](#encodable)
-  - [Formatter](#formatter)
-  - [Int](#int)
-  - [JSONDecoder](#jsondecoder)
-  - [KeyedDecodingContainer](#keyeddecodingcontainer)
-  - [NSSortDescriptor](#nssortdescriptor)
-  - [Numeric](#numeric)
-  - [String](#string)
-  - [URL](#url)
-  - [URLRequest](#urlrequest)
-- [Utilities](#utilities)
-  - [AnyCodable](#anycodable)
-  - [EquatableNoop](#equatablenoop)
-  - [Faking](#faking)
-  - [HashableNoop](#hashablenoop)
-  - [IndexedCollection](#indexedcollection)
-  - [S3MediaResource](#s3mediaresource)
-  - [StorableValue](#storablevalue)
-  - [SafetyStorage](#safetystorage)
+- [Extensions and Components](#extensions-and-components)
+  - [View Extensions](#view-extensions)
+  - [UIKit Wrappers](#uikit-wrappers)
+  - [Modifiers](#modifiers)
+  - [Other Components](#other-components)
+  - [Additional UIKit Extensions](#additional-uikit-extensions)
 - [License](#license)
 
 ## Installation
 
-To use SwiftFoundation in your project, you can simply include the source files in your project or add it as a Swift Package.
+To use `SwiftUIKit` in your project, copy the source files directly into your project, or use Swift Package Manager.
 
 ## Usage
 
-Each extension and utility included in this library extends existing Swift types or provides new functionality to make your code more concise and expressive. Refer to the extensions listed below for details on usage.
+After installation, import the library into your SwiftUI views:
 
-## Extensions
+```swift
+import SwiftUI
+import SwiftUI_Kit
+```
 
-### Array
-- `jsonArray`
-- `sorted(keyPath:ascending:)`
-- `toggle(_:)`
-- `removeFirst(_:)`
-- `safeIndex`
-- `toDictionary(_:)`
-- `ids`
-- `mutate(_:)`
+You can then use the provided extensions, components, and modifiers to enhance your views. Each extension and utility included in this library extends existing SwiftUI types or provides new functionality to make your code more concise and expressive. Refer to the extensions and components listed below for details on usage.
 
-### Bool
-- `init(_:)`
-- `toggle()`
+## List of Extensions and Components
 
-### Bundle
-- `appVersion`
-- `buildNumber`
-- `appVersionWithBuildNumber`
+### View Extensions
 
-### Calendar
-- `generateDates(inside:matching:)`
+- **`cornerRadius(_:corners:)`**
+  Applies rounded corners to specific corners of a view.
 
-### CharacterSet
-- `urlQueryValueAllowed`
+- **`embedInNavigationView()`**
+  Embeds the view in a `NavigationView`.
 
-### CLLocation
-- `isValid`
-- `isZero`
-- `string`
-- `whiteHouse`
-- `isWhiteHouse`
-- `vCard(title:)`
+- **`embedInScrollView(alignment:)`**
+  Embeds the view in a `ScrollView`.
 
-### CNMutablePostalAddress
-- `init(placemark:)`
+- **`eraseToAnyView()`**  
+  Converts the view to `AnyView`.
 
-### CodingUserInfoKey
-- `codingKeys`
+- **`loaderSheet(isPresented:title:font:indicatorColor:titleColor:backgroundColor:)`**  
+  Displays a loading sheet with a customizable activity indicator.
 
-### Data
-- `unwrapJSONDataBy(key:)`
-- `applyBlockForEachJSONObject(_:)`
-- `applyBlockForJSONObject(_:)`
+- **`navigationBarColor(_:shadowColor:titleColor:)`**  
+  Modifies the navigation bar’s color, shadow, and title color.
 
-### Date
-- `yesterday`
-- `tomorrow`
-- `startOfDay`
-- `endOfDay`
-- `dateByAdding(days:)`
-- `noon`
-- `day`
-- `month`
-- `startOfMonth`
-- `endOfMonth`
-- `isLastDayOfMonth`
-- `setTime(from:)`
-- `daysDiff(from:)`
-- `add(_:)`
-- `add(_:to:)`
-- `add(_:)`
+- **`addVisualEffectAsBackground(effect:)`**  
+  Adds a `UIVisualEffect` as the background of the view.
 
-### DateFormatter
-- `iso8601`
-- `medium`
-- `full`
-- `mediumWithTime`
-- `monthFull`
-- `monthShort`
-- `weekday`
-- `weekdayShort`
-- `year`
+- **`pullToRefresh(isRefreshing:)`**  
+  Adds a pull-to-refresh capability to the view.
 
-### Dictionary
-- `jsonString`
-- `percentEscaped`
+- **`allowSwipeToDismiss(_:)`**  
+  Allows swipe-to-dismiss behavior on the view.
 
-### Double
-- `SecondsConvertibleComponent`
-- `seconds(in:_:)`
-- `secondsAs(_:)`
+- **`uiKitOnAppear(_:)`**  
+  Executes a closure when the view appears using UIKit’s `viewDidAppear`.
 
-### Encodable
-- `dictionary`
+### UIKit Wrappers
 
-### Formatter
-- `withSeparator`
-- `roundingDownWithSeparator`
+- **`ActivityIndicator`**  
+  A SwiftUI wrapper for `UIActivityIndicatorView`.
 
-### Int
-- `init(_:)`
+- **`MailView`**  
+  A SwiftUI wrapper for `MFMailComposeViewController`.
 
-### JSONDecoder
-- `snakeCaseDecoder`
+- **`PageControl`**  
+  A SwiftUI wrapper for `UIPageControl`.
 
-### KeyedDecodingContainer
-- `decode(_:as:)`
-- `decodeIfPresent(_:)`
-- `decodeSafely(_:)`
-- `decodeSafelyIfPresent(_:)`
+- **`PagerView`**  
+  A view that displays a paginated, swipeable collection of pages.
 
-### NSSortDescriptor
-- `byId(asending:)`
+- **`PencilKitView`**  
+  A SwiftUI wrapper for `PKCanvasView`, allowing users to draw using PencilKit.
 
-### Numeric
-- `formattedWithSeparator`
-- `roundingDownWithSeparator`
+- **`SafariView`**  
+  A SwiftUI wrapper for `SFSafariViewController`.
 
-### String
-- `capitalizingFirstLetter()`
-- `toData(using:)`
-- `evaluate(withRegex:)`
-- `id`
-- `toBase64()`
-- `fromBase64()`
-- `format(parameters:...)`
-- `sliceIncluding(from:to:)`
-- `convertHtml()`
+- **`ShareSheet`**  
+  A SwiftUI wrapper for `UIActivityViewController`.
 
-### URL
-- `id`
-- `queryFirstValue`
-- `queryDict`
+- **`VideoPlayerView`**  
+  A SwiftUI wrapper for `AVPlayerViewController`.
 
-### URLRequest
-- `init(url:method:headers:multipartFormData:)`
+### Modifiers
 
-## Utilities
+- **`AnimatedRedactedModifier`**  
+  Applies an animated redacted (shimmer) effect to a view.
 
-### AnyCodable
-- Provides a type-erased wrapper for Codable types.
+- **`LoaderSheet`**  
+  Displays a loading sheet with a customizable activity indicator.
 
-### EquatableNoop
-- A property wrapper that makes a value conform to `Equatable` without actually comparing its wrapped value.
+- **`NavigationControllerConfigurator`**  
+  Configures the navigation controller for the current view.
 
-### Faking
-- Provides functionality to generate fake instances of types conforming to the `Faking` protocol.
+- **`RoundedCorner`**  
+  A shape that rounds specific corners of a rectangle.
 
-### HashableNoop
-- A property wrapper that makes a value conform to `Hashable` without affecting its hash value.
+### Other Components
 
-### IndexedCollection
-- A wrapper for collections that provides access to both the index and the element.
+- **`IfLetView`**  
+  A view that conditionally displays content based on the presence of an optional value.
 
-### S3MediaResource
-- Represents a media resource with support for generating scaled image URLs.
+- **`IfLetViewPlaceholder`**  
+  A view that conditionally displays content with a placeholder for the `nil` case.
 
-### StorableValue
-- A property wrapper that provides an interface for storing values in `SafetyStorage`.
+- **`UIKitAppear`**  
+  Provides a way to execute a closure when the view appears using UIKit’s `viewDidAppear`.
 
-### SafetyStorage
-- A protocol for safely saving and loading data.
+### Additional UIKit Extensions
+
+- **`EdgeInsets`**  
+  Provides utility methods to create `EdgeInsets`.
+
+- **`UIApplication`**  
+  Retrieves the active window and ends editing.
+
+- **`UIFont`**  
+  Calculates the height of a text using the font.
+
+- **`UIColor`**  
+  Converts `Color` to `UIColor`.
+
+- **`UIDevice`**  
+  Utility properties for checking device types (e.g., iPhone SE, iPhone 8).
+
+- **`PreviewDevice`**  
+  Utility properties for common iOS devices.
 
 ## License
 
-This library is released under the MIT license. See [LICENSE](License) for details.
+This library is released under the MIT license. See [LICENSE](LICENSE) for details.
