@@ -1,19 +1,30 @@
+//===--- HashableNoop.swift -----------------------------------------------===//
 //
-//  HashableNoop.swift
-//  
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 08.09.2021.
+// Copyright (c) 2024 You Are Launched
+// Licensed under Apache License v2.0
 //
+// See https://opensource.org/licenses/Apache-2.0 for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
+/// A property wrapper that conforms to `Hashable` but does not contribute to the hashing process.
+/// It is useful when you want to conform to `Hashable` but exclude a specific property from affecting the hash value.
 @propertyWrapper
 public struct HashableNoop<Value: Equatable>: Hashable {
+    /// The wrapped value of the property.
     public var wrappedValue: Value
-
+    
+    /// Initializes a new `HashableNoop` with the given value.
+    /// - Parameter value: The initial value to wrap.
     public init(wrappedValue value: Value) {
         self.wrappedValue = value
     }
-
+    
+    /// A no-op implementation of the `hash(into:)` method.
+    /// - Parameter hasher: The hasher to use for combining the wrapped value.
     public func hash(into hasher: inout Hasher) {}
 }
