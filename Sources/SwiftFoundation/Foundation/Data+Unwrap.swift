@@ -3,9 +3,9 @@
 // This source file is part of the SwiftFoundation open source project
 //
 // Copyright (c) 2024 You Are Launched
-// Licensed under Apache License v2.0
+// Licensed under MIT license
 //
-// See https://opensource.org/licenses/Apache-2.0 for license information
+// See https://opensource.org/licenses/MIT for license information
 //
 //===----------------------------------------------------------------------===//
 
