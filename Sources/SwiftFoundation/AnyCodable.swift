@@ -1,25 +1,36 @@
+//===--- AnyCodable.swift -------------------------------------------------===//
 //
-//  AnyCodable.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 22.09.2021.
+// Copyright (c) 2024 You Are Launched
+// Licensed under Apache License v2.0
 //
+// See https://opensource.org/licenses/Apache-2.0 for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
+/// A type-erased `Codable` value that can hold any type conforming to `Codable`.
 public struct AnyCodable {
+    /// The underlying value of the `AnyCodable`.
     public let value: Any
-
+    
+    /// Initializes an `AnyCodable` with an optional value.
+    /// - Parameter value: The value to be stored. If `nil`, an empty `Void` value is stored.
     public init<T>(_ value: T?) {
         self.value = value ?? ()
     }
 }
 
 extension AnyCodable: Codable {
-
+    
+    /// Initializes an `AnyCodable` from a decoder.
+    /// - Parameter decoder: The decoder to use for decoding the value.
+    /// - Throws: An error if the value cannot be decoded.
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-
+        
         if container.decodeNil() {
             self.init(())
         } else if let bool = try? container.decode(Bool.self) {
@@ -40,10 +51,13 @@ extension AnyCodable: Codable {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "AnyCodable value cannot be decoded")
         }
     }
-
+    
+    /// Encodes the value to an encoder.
+    /// - Parameter encoder: The encoder to use for encoding the value.
+    /// - Throws: An error if the value cannot be encoded.
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-
+        
         switch self.value {
         case is Void:
             try container.encodeNil()
@@ -91,6 +105,7 @@ extension AnyCodable: Codable {
 }
 
 extension AnyCodable: Equatable {
+    /// Compares two `AnyCodable` values for equality.
     public static func ==(lhs: AnyCodable, rhs: AnyCodable) -> Bool {
         switch (lhs.value, rhs.value) {
         case is (Void, Void):
@@ -134,6 +149,7 @@ extension AnyCodable: Equatable {
 }
 
 extension AnyCodable: CustomStringConvertible {
+    /// A string representation of the `AnyCodable` value.
     public var description: String {
         switch value {
         case is Void:
@@ -147,6 +163,7 @@ extension AnyCodable: CustomStringConvertible {
 }
 
 extension AnyCodable: CustomDebugStringConvertible {
+    /// A debug string representation of the `AnyCodable` value.
     public var debugDescription: String {
         switch value {
         case let value as CustomDebugStringConvertible:
@@ -158,35 +175,50 @@ extension AnyCodable: CustomDebugStringConvertible {
 }
 
 extension AnyCodable: ExpressibleByNilLiteral, ExpressibleByBooleanLiteral, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, ExpressibleByStringLiteral, ExpressibleByArrayLiteral, ExpressibleByDictionaryLiteral {
-
+    
+    /// Initializes an `AnyCodable` instance from a `nil` literal.
     public init(nilLiteral: ()) {
         self.init(nil as Any?)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from a boolean literal.
+    /// - Parameter value: The boolean value to initialize.
     public init(booleanLiteral value: Bool) {
         self.init(value)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from an integer literal.
+    /// - Parameter value: The integer value to initialize.
     public init(integerLiteral value: Int) {
         self.init(value)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from a float literal.
+    /// - Parameter value: The double value to initialize.
     public init(floatLiteral value: Double) {
         self.init(value)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from an extended grapheme cluster literal.
+    /// - Parameter value: The string value to initialize.
     public init(extendedGraphemeClusterLiteral value: String) {
         self.init(value)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from a string literal.
+    /// - Parameter value: The string value to initialize.
     public init(stringLiteral value: String) {
         self.init(value)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from an array literal.
+    /// - Parameter elements: The array of elements to initialize.
     public init(arrayLiteral elements: Any...) {
         self.init(elements)
     }
-
+    
+    /// Initializes an `AnyCodable` instance from a dictionary literal.
+    /// - Parameter elements: The key-value pairs to initialize the dictionary.
     public init(dictionaryLiteral elements: (AnyHashable, Any)...) {
         self.init(Dictionary<AnyHashable, Any>(elements, uniquingKeysWith: { (first, _) in first }))
     }
