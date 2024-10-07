@@ -24,7 +24,7 @@ public extension CGSize {
         let scale = Screen.main?.backingScaleFactor
         #endif
         
-        return CGSize(width: size.width * (scale ?? 1), height: size.height * (scale ?? 1))
+        return CGSize(width: size.width * scale, height: size.height * scale)
     }
 
     var scaledSize: CGSize { Self.scaledSize(self) }
