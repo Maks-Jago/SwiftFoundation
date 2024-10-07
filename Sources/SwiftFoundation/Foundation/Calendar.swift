@@ -1,13 +1,22 @@
+//===--- Calendar.swift ---------------------------------------------------===//
 //
-//  Calendar.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 25.10.2020.
+// Copyright (c) 2024 You Are Launched
+// Licensed under Apache License v2.0
 //
+// See https://opensource.org/licenses/Apache-2.0 for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
 public extension Calendar {
+    /// Generates an array of dates within a specified date interval that match given date components.
+    /// - Parameters:
+    ///   - interval: The `DateInterval` within which to generate dates.
+    ///   - components: The `DateComponents` to match (e.g., specific time components).
+    /// - Returns: An array of `Date` objects that fall within the interval and match the specified components.
     func generateDates(
         inside interval: DateInterval,
         matching components: DateComponents

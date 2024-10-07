@@ -1,13 +1,19 @@
+//===--- Dictionary+Request.swift -----------------------------------------===//
 //
-//  Dictionary+Request.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 25.10.2020.
+// Copyright (c) 2024 You Are Launched
+// Licensed under Apache License v2.0
 //
+// See https://opensource.org/licenses/Apache-2.0 for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
 public extension Dictionary {
+    /// Converts the dictionary into a percent-escaped query string.
+    /// - Returns: A `String` containing the percent-escaped key-value pairs joined by "&".
     func percentEscaped() -> String {
         return map { (key, value) in
             let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
@@ -19,6 +25,7 @@ public extension Dictionary {
 }
 
 public extension CharacterSet {
+    /// A custom character set for encoding URL query values.
     static let urlQueryValueAllowed: CharacterSet = {
         let generalDelimitersToEncode = ":#[]@"
         let subDelimitersToEncode = "!$&'()*+,;="
