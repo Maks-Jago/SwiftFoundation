@@ -1,13 +1,19 @@
+//===--- Encodable.swift --------------------------------------------------===//
 //
-//  Encodable.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 25.10.2020.
+// Copyright (c) 2024 You are launched
+// Licensed under MIT license
 //
+// See https://opensource.org/licenses/MIT for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
 public extension Encodable {
+    /// Converts the conforming `Encodable` instance into a dictionary.
+    /// - Returns: A dictionary representation of the instance, or `nil` if encoding fails.
     var dictionary: [String: Any]? {
         guard let data = try? JSONEncoder().encode(self) else {
             return nil

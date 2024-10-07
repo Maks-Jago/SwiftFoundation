@@ -1,30 +1,42 @@
+//===--- CLLocation.swift -------------------------------------------------===//
 //
-//  CLLocation.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 25.10.2020.
+// Copyright (c) 2024 You are launched
+// Licensed under MIT license
 //
+// See https://opensource.org/licenses/MIT for license information
+//
+//===----------------------------------------------------------------------===//
 
 import CoreLocation
 
 public extension CLLocation {
-
+    
+    /// Checks if the coordinate of the location is valid.
     var isValid: Bool {
         CLLocationCoordinate2DIsValid(coordinate)
     }
-
+    
+    /// Checks if the location is at the zero coordinate (latitude and longitude equal to 0).
     var isZero: Bool {
         self.coordinate.latitude == 0 && self.coordinate.longitude == 0
     }
     
+    /// Returns a string representation of the location's coordinates in "latitude, longitude" format.
     var string: String {
         String(format: "%.6f", coordinate.latitude) + ", " + String(format: "%.6f", coordinate.longitude)
     }
     
+    /// A static property representing the location of the White House.
     static var whiteHouse: CLLocation = CLLocation(latitude: 38.897793, longitude: -77.036616)
     
+    /// Checks if the location is at the White House coordinates.
     var isWhiteHouse: Bool { self == Self.whiteHouse }
     
+    /// Generates a vCard file for the location.
+    /// - Parameter title: An optional title for the vCard. Defaults to "Shared Location".
+    /// - Returns: A URL pointing to the saved vCard file.
     func vCard(title: String? = nil) -> URL {
         let vCardFileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(title ?? "vCard").loc.vcf")
         

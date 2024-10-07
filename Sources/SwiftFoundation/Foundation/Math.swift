@@ -1,21 +1,34 @@
+//===--- Math.swift -------------------------------------------------------===//
 //
-//  Math.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 25.10.2020.
+// Copyright (c) 2024 You are launched
+// Licensed under MIT license
 //
+// See https://opensource.org/licenses/MIT for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 import CoreGraphics
 
+/// Rounds a `CGFloat` value up to the nearest integer.
+/// - Parameter value: The `CGFloat` value to be rounded up.
+/// - Returns: The smallest integer greater than or equal to `value`.
 func ceilCGF(_ value: CGFloat) -> CGFloat {
     CGFloat(ceilf(Float(value)))
 }
 
+/// Rounds a `CGFloat` value to the nearest integer.
+/// - Parameter value: The `CGFloat` value to be rounded.
+/// - Returns: The integer closest to `value`.
 func roundCGF(_ value: CGFloat) -> CGFloat {
     CGFloat(roundf(Float(value)))
 }
 
+/// Rounds a `CGFloat` value down to the nearest integer.
+/// - Parameter value: The `CGFloat` value to be rounded down.
+/// - Returns: The largest integer less than or equal to `value`.
 func floorCGF(_ value: CGFloat) -> CGFloat {
     CGFloat(floorf(Float(value)))
 }

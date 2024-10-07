@@ -1,14 +1,19 @@
+//===--- Formatter.swift --------------------------------------------------===//
 //
-//  Formatter.swift
-//  SwiftFoundation
+// This source file is part of the SwiftFoundation open source project
 //
-//  Created by Max Kuznetsov on 25.10.2020.
+// Copyright (c) 2024 You are launched
+// Licensed under MIT license
 //
+// See https://opensource.org/licenses/MIT for license information
+//
+//===----------------------------------------------------------------------===//
 
 import Foundation
 
 public extension Formatter {
     
+    /// A `NumberFormatter` that formats numbers with a grouping separator (`,`), no decimal places, and a `.` as the decimal separator.
     static let withSeparator: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.groupingSeparator = ","
@@ -19,6 +24,7 @@ public extension Formatter {
         return formatter
     }()
     
+    /// A `NumberFormatter` that formats numbers with a grouping separator (`,`), up to two decimal places, and a `.` as the decimal separator. It uses a rounding mode of `.down`.
     static let roundingDownWithSeparator: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.groupingSeparator = ","
