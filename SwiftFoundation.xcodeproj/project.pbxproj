@@ -55,9 +55,15 @@
 		8278332526FBC37B0008252A /* EquatableNoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332326FBC37B0008252A /* EquatableNoop.swift */; };
 		8278332626FBC37B0008252A /* HashableNoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332426FBC37B0008252A /* HashableNoop.swift */; };
 		8278332A26FBC38B0008252A /* Faking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332826FBC38B0008252A /* Faking.swift */; };
-		8278332B26FBC38B0008252A /* SafetyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332926FBC38B0008252A /* SafetyStorage.swift */; };
 		8278332E26FBC3D90008252A /* S3MediaResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278332D26FBC3D90008252A /* S3MediaResource.swift */; };
 		8278333126FBC3E40008252A /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8278333026FBC3E40008252A /* CGSize.swift */; };
+		BDCE47B22E27971D00AAB567 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCE47B12E27971900AAB567 /* Character.swift */; };
+		BDCE605E2E27EEBF00AAB567 /* Data+SizeInMB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCE605D2E27EEA900AAB567 /* Data+SizeInMB.swift */; };
+		BDCE60602E27EEF900AAB567 /* URL+FileSizeInMB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCE605F2E27EEF000AAB567 /* URL+FileSizeInMB.swift */; };
+		BDDCF9072E1FFEC5000CB717 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDCF9062E1FFEC2000CB717 /* Collection.swift */; };
+		BDDCFDBC2E213A57000CB717 /* UserDefaults+SafetyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDCFDBA2E213A57000CB717 /* UserDefaults+SafetyStorage.swift */; };
+		BDDCFDBD2E213A57000CB717 /* SafetyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDCFDB82E213A57000CB717 /* SafetyStorage.swift */; };
+		BDDCFDBE2E213A57000CB717 /* StorableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDCFDB92E213A57000CB717 /* StorableValue.swift */; };
 		OBJ_30 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_41 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SwiftFoundationTests.swift */; };
 		OBJ_42 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* XCTestManifests.swift */; };
@@ -116,9 +122,15 @@
 		8278332326FBC37B0008252A /* EquatableNoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableNoop.swift; sourceTree = "<group>"; };
 		8278332426FBC37B0008252A /* HashableNoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableNoop.swift; sourceTree = "<group>"; };
 		8278332826FBC38B0008252A /* Faking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Faking.swift; sourceTree = "<group>"; };
-		8278332926FBC38B0008252A /* SafetyStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafetyStorage.swift; sourceTree = "<group>"; };
 		8278332D26FBC3D90008252A /* S3MediaResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3MediaResource.swift; sourceTree = "<group>"; };
 		8278333026FBC3E40008252A /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		BDCE47B12E27971900AAB567 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		BDCE605D2E27EEA900AAB567 /* Data+SizeInMB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+SizeInMB.swift"; sourceTree = "<group>"; };
+		BDCE605F2E27EEF000AAB567 /* URL+FileSizeInMB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+FileSizeInMB.swift"; sourceTree = "<group>"; };
+		BDDCF9062E1FFEC2000CB717 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		BDDCFDB82E213A57000CB717 /* SafetyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyStorage.swift; sourceTree = "<group>"; };
+		BDDCFDB92E213A57000CB717 /* StorableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableValue.swift; sourceTree = "<group>"; };
+		BDDCFDBA2E213A57000CB717 /* UserDefaults+SafetyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+SafetyStorage.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* SwiftFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFoundationTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_17 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -161,6 +173,10 @@
 		50831F4D2545F2F400DC7EF6 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				BDCE605F2E27EEF000AAB567 /* URL+FileSizeInMB.swift */,
+				BDCE605D2E27EEA900AAB567 /* Data+SizeInMB.swift */,
+				BDCE47B12E27971900AAB567 /* Character.swift */,
+				BDDCF9062E1FFEC2000CB717 /* Collection.swift */,
 				5083204F2545FE8700DC7EF6 /* Array.swift */,
 				508320152545FCF200DC7EF6 /* Bool.swift */,
 				50831FA02545F4F100DC7EF6 /* Calendar.swift */,
@@ -209,8 +225,8 @@
 		8278332726FBC38B0008252A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				BDDCFDBB2E213A57000CB717 /* SafetyStorage */,
 				8278332826FBC38B0008252A /* Faking.swift */,
-				8278332926FBC38B0008252A /* SafetyStorage.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -229,6 +245,16 @@
 				8278333026FBC3E40008252A /* CGSize.swift */,
 			);
 			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
+		BDDCFDBB2E213A57000CB717 /* SafetyStorage */ = {
+			isa = PBXGroup;
+			children = (
+				BDDCFDB82E213A57000CB717 /* SafetyStorage.swift */,
+				BDDCFDB92E213A57000CB717 /* StorableValue.swift */,
+				BDDCFDBA2E213A57000CB717 /* UserDefaults+SafetyStorage.swift */,
+			);
+			path = SafetyStorage;
 			sourceTree = "<group>";
 		};
 		OBJ_10 /* Tests */ = {
@@ -387,8 +413,10 @@
 				8278332E26FBC3D90008252A /* S3MediaResource.swift in Sources */,
 				50831F9B2545F4D300DC7EF6 /* String.swift in Sources */,
 				5083205A2545FEDE00DC7EF6 /* Dictionary.swift in Sources */,
+				BDCE60602E27EEF900AAB567 /* URL+FileSizeInMB.swift in Sources */,
 				8278332626FBC37B0008252A /* HashableNoop.swift in Sources */,
 				508320342545FDA200DC7EF6 /* Int.swift in Sources */,
+				BDDCF9072E1FFEC5000CB717 /* Collection.swift in Sources */,
 				50831FE22545F92600DC7EF6 /* CLLocation.swift in Sources */,
 				8278330526FB22D50008252A /* Double+SecondsConvertibleComponent.swift in Sources */,
 				8278330726FB328D0008252A /* Bundle.swift in Sources */,
@@ -398,7 +426,6 @@
 				508320602545FFCA00DC7EF6 /* URLRequest+Multipart.swift in Sources */,
 				509C917526FB9655005D290C /* AnyCodable.swift in Sources */,
 				50831FAD2545F55F00DC7EF6 /* Data+Unwrap.swift in Sources */,
-				8278332B26FBC38B0008252A /* SafetyStorage.swift in Sources */,
 				50831FD72545F89D00DC7EF6 /* IndexedCollection.swift in Sources */,
 				508320102545FCBA00DC7EF6 /* AnyPublisher+ZipMany.swift in Sources */,
 				50831FEC2545F96A00DC7EF6 /* CNMutablePostalAddress.swift in Sources */,
@@ -411,11 +438,16 @@
 				50831F4F2545F30300DC7EF6 /* Publisher.swift in Sources */,
 				5083203A2545FDB800DC7EF6 /* JSONDecoder.swift in Sources */,
 				50831F952545F49700DC7EF6 /* Date.swift in Sources */,
+				BDDCFDBC2E213A57000CB717 /* UserDefaults+SafetyStorage.swift in Sources */,
+				BDDCFDBD2E213A57000CB717 /* SafetyStorage.swift in Sources */,
+				BDCE47B22E27971D00AAB567 /* Character.swift in Sources */,
+				BDDCFDBE2E213A57000CB717 /* StorableValue.swift in Sources */,
 				50831FF82545F9B700DC7EF6 /* PassthroughSubject.swift in Sources */,
 				8278332A26FBC38B0008252A /* Faking.swift in Sources */,
 				50831FC52545F80100DC7EF6 /* Formatter.swift in Sources */,
 				508320502545FE8800DC7EF6 /* Array.swift in Sources */,
 				50831FA12545F4F100DC7EF6 /* Calendar.swift in Sources */,
+				BDCE605E2E27EEBF00AAB567 /* Data+SizeInMB.swift in Sources */,
 				5083202A2545FD8600DC7EF6 /* Encodable.swift in Sources */,
 				8278332526FBC37B0008252A /* EquatableNoop.swift in Sources */,
 				5083204A2545FE2200DC7EF6 /* URL.swift in Sources */,
