@@ -100,7 +100,7 @@ public extension Array {
     /// Returns the element at the specified index if it is within bounds, otherwise returns `nil`.
     /// - Parameter idx: The index of the element.
     /// - Returns: The element at the specified index, or `nil` if the index is out of bounds.
-    subscript(ifExists idx: Index) -> Element? {
+    subscript(safe idx: Index) -> Element? {
         get { (startIndex ..< endIndex) ~= idx ? self[idx] : nil }
         set { if (startIndex ..< endIndex) ~= idx, newValue != nil { self[idx] = newValue! } }
     }
