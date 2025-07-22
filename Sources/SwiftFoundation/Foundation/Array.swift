@@ -97,6 +97,16 @@ public extension Array {
 }
 
 public extension Array {
+    /// Returns the element at the specified index if it is within bounds, otherwise returns `nil`.
+    /// - Parameter idx: The index of the element.
+    /// - Returns: The element at the specified index, or `nil` if the index is out of bounds.
+    subscript(safe idx: Index) -> Element? {
+        get { (startIndex ..< endIndex) ~= idx ? self[idx] : nil }
+        set { if (startIndex ..< endIndex) ~= idx, newValue != nil { self[idx] = newValue! } }
+    }
+}
+
+public extension Array {
     /// Converts the array to a dictionary using a key path.
     /// - Parameter keyPath: The key path to use as the key for each dictionary entry.
     /// - Returns: A dictionary where the keys are values from the key path and the values are elements of the array.
@@ -123,6 +133,58 @@ public extension Array {
             var mutableElement = element
             mutation(&mutableElement)
             return mutableElement
+        }
+    }
+}
+
+public extension Array {
+    /// Mutates each element of the array in-place using the provided transformation closure.
+    ///
+    /// - Parameter transform: A closure that receives each element as an `inout` parameter, allowing direct mutation.
+    ///
+    /// This method replaces the entire array with its transformed version.
+    /// Useful when you want to modify elements by reference rather than returning a new array.
+    ///
+    /// - Throws: Rethrows any error thrown by the `transform` closure.
+    mutating func mutateEach(by transform: (inout Element) throws -> Void) rethrows {
+        self = try map { el in
+            var el = el
+            try transform(&el)
+            return el
+        }
+    }
+}
+
+public extension Array {
+    /// Safely swaps two elements in the array at the specified indices.
+    ///
+    /// - Parameters:
+    ///   - index: The index of the first element.
+    ///   - otherIndex: The index of the second element.
+    ///
+    /// This method checks that both indices are within bounds and not equal before performing the swap.
+    mutating func safeSwap(from index: Index, to otherIndex: Index) {
+        guard index != otherIndex else { return }
+        guard startIndex..<endIndex ~= index else { return }
+        guard startIndex..<endIndex ~= otherIndex else { return }
+        swapAt(index, otherIndex)
+    }
+
+    /// Returns a new array sorted to match the order of another reference array.
+    ///
+    /// - Parameters:
+    ///   - otherArray: The array whose order will be mirrored.
+    ///   - otherArrayKeyPath: The key path to the property used for ordering in `otherArray`.
+    ///   - keyPath: The key path to the property used for ordering in the current array.
+    /// - Returns: A new array with elements sorted according to the order in `otherArray`.
+    ///
+    /// Useful when you have two collections of different types and want one to follow the order of the other.
+    func sorted<T, V: Hashable>(like otherArray: [T], otherArrayKeyPath: KeyPath<Array<T>.Element, V>, keyPath: KeyPath<Element, V>) -> [Element] {
+        let dict = otherArray.enumerated().reduce(into: [:]) { $0[$1.element[keyPath: otherArrayKeyPath]] = $1.offset }
+        return sorted {
+            guard let thisIndex = dict[$0[keyPath: keyPath]] else { return false }
+            guard let otherIndex = dict[$1[keyPath: keyPath]] else { return true }
+            return thisIndex < otherIndex
         }
     }
 }
