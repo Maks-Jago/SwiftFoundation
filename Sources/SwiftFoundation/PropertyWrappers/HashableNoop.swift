@@ -14,7 +14,7 @@ import Foundation
 /// A property wrapper that conforms to `Hashable` but does not contribute to the hashing process.
 /// It is useful when you want to conform to `Hashable` but exclude a specific property from affecting the hash value.
 @propertyWrapper
-public struct HashableNoop<Value: Equatable>: Hashable {
+public struct HashableNoop<Value: Sendable & Equatable>: Hashable, Sendable {
     /// The wrapped value of the property.
     public var wrappedValue: Value
     

@@ -13,7 +13,7 @@ import Foundation
 
 /// A property wrapper for storing and retrieving values using a `SafetyStorage` mechanism.
 @propertyWrapper
-public struct StorableValue<T: Codable> {
+public struct StorableValue<T: Codable & Sendable>: Sendable {
     /// The default value to use if no stored value is found.
     public var defaultValue: T
     /// The key used to store and retrieve the value.

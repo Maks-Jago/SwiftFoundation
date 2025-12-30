@@ -14,7 +14,7 @@ import Foundation
 /// A property wrapper that conforms to `Equatable` but always returns `true` for equality checks.
 /// This is useful when you want to conform to `Equatable` without considering the wrapped property's value in equality comparisons.
 @propertyWrapper
-public struct EquatableNoop<Value>: Equatable {
+public struct EquatableNoop<Value: Sendable>: Equatable, Sendable {
     /// The wrapped value of the property.
     public var wrappedValue: Value
     

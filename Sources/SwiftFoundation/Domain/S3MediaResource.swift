@@ -14,10 +14,10 @@ import SwiftUI
 import struct CoreGraphics.CGSize
 
 /// A structure representing a media resource that holds a media URL and configuration settings.
-public struct S3MediaResource: Codable {
+public struct S3MediaResource: Codable, Sendable {
     
     /// A nested struct representing the unique identifier for an `S3MediaResource`.
-    public struct Id: Hashable, Codable {
+    public struct Id: Hashable, Codable, Sendable {
         /// The value of the ID.
         public var value: Int
         
@@ -141,7 +141,7 @@ public extension S3MediaResource {
 
 public extension S3MediaResource {
     /// A structure representing configuration settings for the media resource.
-    struct Configs: Codable {
+    struct Configs: Codable, Sendable {
         /// The name of the bucket.
         public var bucketName: String
         /// The base URL path for the CDN.

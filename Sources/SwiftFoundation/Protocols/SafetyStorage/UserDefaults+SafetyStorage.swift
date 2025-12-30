@@ -14,6 +14,7 @@ import Foundation
 /// Extends `UserDefaults` to conform to the `SafetyStorage` protocol,
 /// allowing for the storage, retrieval, and removal of Codable objects and strings.
 extension UserDefaults: SafetyStorage {
+      private static let syncQueue = DispatchQueue(label: "swiftFoundation.userDefaults.safetyStorage.queue")
     
     /// Saves an encodable object to `UserDefaults`.
     /// - Parameters:
@@ -22,7 +23,9 @@ extension UserDefaults: SafetyStorage {
     /// - Throws: An error if the object cannot be encoded.
     public func save<T>(_ object: T, key: String) throws where T: Encodable {
         let data = try JSONEncoder().encode(object)
-        self.set(data, forKey: key)
+        Self.syncQueue.sync {
+          self.set(data, forKey: key)
+        }
     }
     
     /// Loads a decodable object from `UserDefaults`.
@@ -33,14 +36,18 @@ extension UserDefaults: SafetyStorage {
         guard let data = self.data(forKey: key) else {
             return nil
         }
-        return try JSONDecoder().decode(T.self, from: data)
+        return try Self.syncQueue.sync {
+          try JSONDecoder().decode(T.self, from: data)
+        }
     }
     
     /// Removes an object from `UserDefaults`.
     /// - Parameter key: The key under which the object is stored.
     /// - Throws: An error if the object cannot be removed.
     public func remove(key: String) throws {
-        self.set(nil, forKey: key)
+        Self.syncQueue.sync {
+          self.set(nil, forKey: key)
+        }
     }
     
     /// Saves a string to `UserDefaults`.
@@ -49,10 +56,12 @@ extension UserDefaults: SafetyStorage {
     ///   - key: The key under which the string is stored.
     /// - Throws: An error if the string cannot be saved.
     public func saveString(_ string: String?, key: String) throws {
-        if let string = string {
+        if let string {
+          Self.syncQueue.sync {
             self.set(string, forKey: key)
+          }
         } else {
-            try self.remove(key: key)
+          try remove(key: key)
         }
     }
     
@@ -60,6 +69,8 @@ extension UserDefaults: SafetyStorage {
     /// - Parameter key: The key under which the string is stored.
     /// - Returns: The string, or `nil` if it cannot be found.
     public func loadString(key: String) throws -> String? {
-        self.value(forKey: key) as? String
+        Self.syncQueue.sync {
+          self.value(forKey: key) as? String
+        }
     }
 }

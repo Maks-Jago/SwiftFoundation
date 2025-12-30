@@ -12,7 +12,7 @@
 import Foundation
 
 /// A type-erased `Codable` value that can hold any type conforming to `Codable`.
-public struct AnyCodable {
+public struct AnyCodable: Sendable {
     /// The underlying value of the `AnyCodable`.
     public let value: Any
     
