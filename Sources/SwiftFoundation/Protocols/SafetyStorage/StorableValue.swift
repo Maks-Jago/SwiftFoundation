@@ -13,7 +13,7 @@ import Foundation
 
 /// A property wrapper for storing and retrieving values using a `SafetyStorage` mechanism.
 @propertyWrapper
-public struct StorableValue<T: Codable & Sendable>: Sendable {
+public struct StorableValue<T: Codable> {
     /// The default value to use if no stored value is found.
     public var defaultValue: T
     /// The key used to store and retrieve the value.
@@ -57,3 +57,5 @@ public struct StorableValue<T: Codable & Sendable>: Sendable {
 
 /// Conformance to `Equatable` for `StorableValue` when `T` is also `Equatable`.
 extension StorableValue: Equatable where T: Equatable {}
+/// Conformance to `Sendable` for `StorableValue` when `T` is also `Sendable`.
+extension StorableValue: Sendable where T: Sendable {}
