@@ -12,9 +12,9 @@
 import Foundation
 
 /// A type-erased `Codable` value that can hold any type conforming to `Codable`.
-public struct AnyCodable {
+public struct AnyCodable: Sendable {
     /// The underlying value of the `AnyCodable`.
-    public let value: Any
+    public let value: Sendable
     
     /// Initializes an `AnyCodable` with an optional value.
     /// - Parameter value: The value to be stored. If `nil`, an empty `Void` value is stored.

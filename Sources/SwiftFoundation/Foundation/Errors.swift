@@ -12,7 +12,7 @@
 import Foundation
 
 /// A generic error that provides a localized error description.
-public struct SomeError: LocalizedError {
+public struct SomeError: LocalizedError, Sendable {
     
     /// Initializes a new instance of `SomeError`.
     public init() {}
@@ -24,7 +24,7 @@ public struct SomeError: LocalizedError {
 }
 
 /// A custom error that allows for a user-defined error message.
-public struct CustomError: LocalizedError {
+public struct CustomError: LocalizedError, Sendable {
     /// The custom error message.
     var text: String?
     

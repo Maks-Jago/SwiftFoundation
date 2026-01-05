@@ -27,3 +27,6 @@ public struct EquatableNoop<Value>: Equatable {
     /// Always returns `true` when comparing two `EquatableNoop` instances, regardless of their wrapped values.
     public static func == (lhs: EquatableNoop<Value>, rhs: EquatableNoop<Value>) -> Bool { true }
 }
+
+/// Conformance to `Sendable` for `EquatableNoop` when `T` is also `Sendable`.
+extension EquatableNoop: Sendable where Value: Sendable {}

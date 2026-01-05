@@ -28,3 +28,6 @@ public struct HashableNoop<Value: Equatable>: Hashable {
     /// - Parameter hasher: The hasher to use for combining the wrapped value.
     public func hash(into hasher: inout Hasher) {}
 }
+
+/// Conformance to `Sendable` for `EquatableNoop` when `T` is also `Sendable`.
+extension HashableNoop: Sendable where Value: Sendable { }

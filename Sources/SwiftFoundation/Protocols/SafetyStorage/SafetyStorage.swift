@@ -12,7 +12,7 @@
 import Foundation
 
 /// A protocol that defines a safe storage mechanism for encoding, decoding, and managing data.
-public protocol SafetyStorage {
+public protocol SafetyStorage: Sendable {
     
     /// Saves an encodable object to storage.
     /// - Parameters:

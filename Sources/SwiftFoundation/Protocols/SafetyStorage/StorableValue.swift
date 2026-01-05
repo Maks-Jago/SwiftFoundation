@@ -57,3 +57,5 @@ public struct StorableValue<T: Codable> {
 
 /// Conformance to `Equatable` for `StorableValue` when `T` is also `Equatable`.
 extension StorableValue: Equatable where T: Equatable {}
+/// Conformance to `Sendable` for `StorableValue` when `T` is also `Sendable`.
+extension StorableValue: Sendable where T: Sendable {}
