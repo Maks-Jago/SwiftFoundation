@@ -10,13 +10,10 @@
 //===----------------------------------------------------------------------===//
 
 import Foundation
+import struct CoreGraphics.CGSize
 
 #if os(iOS)
 import UIKit
-typealias Screen = UIScreen
-#else
-import AppKit
-typealias Screen = NSScreen
 #endif
 
 public extension CGSize {
@@ -25,12 +22,11 @@ public extension CGSize {
     /// - Returns: A new `CGSize` that is adjusted for the screen's scale factor.
     static func scaledSize(_ size: CGSize) -> CGSize {
 #if os(iOS)
-        let scale = Screen.main.scale
-#else
-        let scale = Screen.main?.backingScaleFactor ?? 1.0
-#endif
-        
+        let scale = UIScreen.currentScale ?? 2.0
         return CGSize(width: size.width * scale, height: size.height * scale)
+#else
+        return size
+#endif
     }
     
     /// A computed property that returns the size scaled according to the screen's scale factor.
