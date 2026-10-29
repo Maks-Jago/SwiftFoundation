@@ -103,8 +103,8 @@ public struct S3MediaResource: Codable, Sendable {
                 """
                 "edits": {
                 "resize": {
-                "width": \(Int(size.width)),
-                "height": \(Int(size.height)),
+                "width": \(Int(size.width.rounded())),
+                "height": \(Int(size.height.rounded())),
                 "fit": "\(contentMode == .fit ? "contain" : "cover")",
                 "background": { "r": 255, "g": 255, "b": 255, "alpha": 0 }
                 }
