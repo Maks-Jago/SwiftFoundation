@@ -10,25 +10,38 @@
 //===----------------------------------------------------------------------===//
 
 import Foundation
-import struct CoreGraphics.CGSize
 
 #if os(iOS)
 import UIKit
+typealias Screen = UIScreen
+#else
+import AppKit
+typealias Screen = NSScreen
 #endif
 
 public extension CGSize {
-    /// Returns a new `CGSize` that is scaled based on the screen's scale factor.
-    /// - Parameter size: The original size to be scaled.
-    /// - Returns: A new `CGSize` that is adjusted for the screen's scale factor.
+    /// Returns the size multiplied by a display scale.
+    /// - Parameter scale: The display scale, e.g. `displayScale` from the SwiftUI environment
+    ///   or `traitCollection.displayScale` of a UIKit view. It has no default value on purpose.
+    ///   If `nil`, the scale of the main screen of the device is used.
+    func scaledSize(scale: CGFloat?) -> CGSize {
+        let scale = scale ?? mainScreenScale
+        return CGSize(width: width * scale, height: height * scale)
+    }
+
+    @available(*, deprecated, message: "Use `scaledSize(scale:)` and pass the scale explicitly, or `nil` to use the scale of the main screen.")
     static func scaledSize(_ size: CGSize) -> CGSize {
+        size.scaledSize(scale: nil)
+    }
+
+    @available(*, deprecated, message: "Use `scaledSize(scale:)` and pass the scale explicitly, or `nil` to use the scale of the main screen.")
+    var scaledSize: CGSize { scaledSize(scale: nil) }
+
+    private var mainScreenScale: CGFloat {
 #if os(iOS)
-        let scale = UIScreen.currentScale ?? 2.0
-        return CGSize(width: size.width * scale, height: size.height * scale)
+        Screen.main.scale
 #else
-        return size
+        Screen.main?.backingScaleFactor ?? 1.0
 #endif
     }
-    
-    /// A computed property that returns the size scaled according to the screen's scale factor.
-    var scaledSize: CGSize { Self.scaledSize(self) }
 }

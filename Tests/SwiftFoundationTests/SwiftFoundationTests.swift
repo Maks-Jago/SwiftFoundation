@@ -2,51 +2,39 @@ import Foundation
 import Testing
 import XCTest
 @testable import SwiftFoundation
-import struct CoreGraphics.CGSize
 
 final class SwiftFoundationTests: XCTestCase {
 }
 
-@Suite("CGSize Scaled Size Tests")
-struct CGSizeScaledSizeTests {
-    @Test("scaledSize computed property matches static method")
-    func scaledSizeMatchesStaticMethod() {
+@Suite("Scaled size")
+struct ScaledSizeTests {
+    @Test("scaledSize multiplies the size by the provided scale")
+    func scaledSizeWithScale() {
+        #expect(CGSize(width: 100, height: 50).scaledSize(scale: 3) == CGSize(width: 300, height: 150))
+    }
+
+    @Test("scaledImageURL requests the size multiplied by the provided scale")
+    func scaledImageURLWithScale() throws {
+        let configs = S3MediaResource.Configs(bucketName: "bucket", cdnBaseURLPath: "https://cdn.example.com/")
+        let resource = S3MediaResource(id: .init(1), mediaUrlPath: "/images/photo.jpg", configs: configs)
+
+        let url = try resource.scaledImageURL(in: CGSize(width: 120, height: 80), scale: 3)
+
+        let encoded = url.absoluteString.replacingOccurrences(of: configs.cdnBaseURLPath, with: "")
+        let json = try #require(encoded.fromBase64())
+        let object = try #require(try JSONSerialization.jsonObject(with: Data(json.utf8)) as? [String: Any])
+        let edits = try #require(object["edits"] as? [String: Any])
+        let resize = try #require(edits["resize"] as? [String: Any])
+
+        #expect(resize["width"] as? Int == 360)
+        #expect(resize["height"] as? Int == 240)
+    }
+
+    @available(*, deprecated)
+    @Test("deprecated scaledSize keeps using the scale of the main screen")
+    func deprecatedScaledSize() {
         let size = CGSize(width: 100, height: 50)
-        let propertyScaled = size.scaledSize
-        let staticScaled = CGSize.scaledSize(size)
 
-        #expect(propertyScaled == staticScaled)
+        #expect(size.scaledSize == size.scaledSize(scale: nil))
     }
-
-    @Test("scaledSize with zero size produces zero")
-    func scaledSizeZero() {
-        let size = CGSize.zero
-        let scaled = size.scaledSize
-
-        #expect(scaled.width == 0)
-        #expect(scaled.height == 0)
-        #expect(scaled == CGSize.zero)
-    }
-
-#if os(iOS)
-    @Test("scaledSize on iOS scales according to screen scale or falls back to 1.0")
-    func scaledSizeIOS() {
-        let size = CGSize(width: 100, height: 50)
-        let scaled = size.scaledSize
-
-        #expect(scaled.width > 0)
-        #expect(scaled.height > 0)
-        #expect(scaled.width == scaled.height * 2)
-    }
-#else
-    @Test("scaledSize on non-iOS platforms returns original size")
-    func scaledSizeNonIOS() {
-        let size = CGSize(width: 100, height: 50)
-        let scaled = size.scaledSize
-
-        #expect(scaled.width == 100)
-        #expect(scaled.height == 50)
-        #expect(scaled == CGSize(width: 100, height: 50))
-    }
-#endif
 }
