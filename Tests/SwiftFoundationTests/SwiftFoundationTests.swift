@@ -51,12 +51,13 @@ struct S3MediaResourceTests {
         )
     }
 
-    private func resizeDimensions(from url: URL) throws -> (width: Int, height: Int) {
+    private func resizeDimensions(from url: URL) throws -> (width: Int, height: Int, fit: String) {
         struct Payload: Decodable {
             struct Edits: Decodable {
                 struct Resize: Decodable {
                     let width: Int
                     let height: Int
+                    let fit: String
                 }
                 let resize: Resize
             }
@@ -66,7 +67,7 @@ struct S3MediaResourceTests {
         let base64 = String(url.absoluteString.dropFirst(baseURL.count))
         let data = try #require(Data(base64Encoded: base64))
         let payload = try JSONDecoder().decode(Payload.self, from: data)
-        return (payload.edits.resize.width, payload.edits.resize.height)
+        return (payload.edits.resize.width, payload.edits.resize.height, payload.edits.resize.fit)
     }
 
     @Test("Rounds fractional dimensions to nearest hardcoded integers")
@@ -84,5 +85,14 @@ struct S3MediaResourceTests {
         let dims2 = try resizeDimensions(from: url2)
         #expect(dims2.width == 101)
         #expect(dims2.height == 200)
+    }
+
+    @Test("resize modes request cover, contain and inside")
+    func resizeModes() throws {
+        let size = CGSize(width: 1003, height: 1426)
+        #expect(try resizeDimensions(from: resource.scaledImageURL(.fill, in: size, scale: 1)).fit == "cover")
+        #expect(try resizeDimensions(from: resource.scaledImageURL(.fit, in: size, scale: 1)).fit == "contain")
+        #expect(try resizeDimensions(from: resource.scaledImageURL(.fitWithinSize, in: size, scale: 1)).fit == "inside")
+        #expect(try resizeDimensions(from: resource.scaledImageURL(in: size, scale: 1)).fit == "contain")
     }
 }

@@ -70,28 +70,28 @@ public struct S3MediaResource: Codable, Sendable {
     
     /// Retrieves a scaled image URL.
     /// - Parameters:
-    ///   - contentMode: A flag indicating whether this image should fit or fill the parent context. Defaults to `.fit`.
+    ///   - resizeMode: How the image is resized to the target size, e.g. `.fitWithinSize` to keep the whole image at its own aspect ratio. Defaults to `.fit`.
     ///   - size: The target size for image resizing. It will be multiplied by `scale`.
     ///   - scale: The display scale, e.g. `displayScale` from the SwiftUI environment or `traitCollection.displayScale`
     ///     of a UIKit view. It has no default value on purpose. If `nil`, the scale of the main screen of the device is used.
     /// - Returns: The scaled image URL (CDN, S3).
     /// - Throws: `MediaResourceError.invalidMediaURL` or `MediaResourceError.invalidCDNURL` if the URL is not valid.
-    public func scaledImageURL(_ contentMode: ContentMode = .fit, in size: CGSize, scale: CGFloat?) throws -> URL {
-        try _imageURL(contentMode, in: size.scaledSize(scale: scale))
+    public func scaledImageURL(_ resizeMode: ResizeMode = .fit, in size: CGSize, scale: CGFloat?) throws -> URL {
+        try _imageURL(resizeMode, in: size.scaledSize(scale: scale))
     }
 
     @available(*, deprecated, message: "Use `scaledImageURL(_:in:scale:)` and pass the scale explicitly, or `nil` to use the scale of the main screen.")
-    public func scaledImageURL(_ contentMode: ContentMode = .fit, in size: CGSize) throws -> URL {
-        try scaledImageURL(contentMode, in: size, scale: nil)
+    public func scaledImageURL(_ resizeMode: ResizeMode = .fit, in size: CGSize) throws -> URL {
+        try scaledImageURL(resizeMode, in: size, scale: nil)
     }
 
-    /// Generates an image URL based on the content mode and size.
+    /// Generates an image URL based on the resize mode and size.
     /// - Parameters:
-    ///   - contentMode: A flag indicating whether the image should fit or fill the parent context.
+    ///   - resizeMode: How the image is resized to the target size.
     ///   - size: The target size for resizing. Can be `nil` for the original size.
     /// - Returns: A URL pointing to the image.
     /// - Throws: `MediaResourceError.invalidMediaURL` or `MediaResourceError.invalidCDNURL` if URL creation fails.
-    private func _imageURL(_ contentMode: ContentMode, in size: CGSize?) throws -> URL {
+    private func _imageURL(_ resizeMode: ResizeMode, in size: CGSize?) throws -> URL {
         guard let mediaURL = URL(string: mediaUrlPath) else {
             throw MediaResourceError.invalidMediaURL
         }
@@ -112,7 +112,7 @@ public struct S3MediaResource: Codable, Sendable {
                 "resize": {
                 "width": \(Int(size.width.rounded())),
                 "height": \(Int(size.height.rounded())),
-                "fit": "\(contentMode == .fit ? "contain" : "cover")",
+                "fit": "\(resizeMode.cdnFit)",
                 "background": { "r": 255, "g": 255, "b": 255, "alpha": 0 }
                 }
                 }
@@ -130,6 +130,30 @@ public struct S3MediaResource: Codable, Sendable {
         }
         
         return cdnURL
+    }
+}
+
+// MARK: - ResizeMode
+
+public extension S3MediaResource {
+    /// Enum representing how an image is resized to the requested size.
+    enum ResizeMode: Sendable {
+        /// Fills the requested size, cropping the image if its aspect ratio differs. Same as `ContentMode.fill`.
+        case fill
+        /// Fits the whole image into the requested size and pads it to exactly that size. Same as `ContentMode.fit`.
+        case fit
+        /// Fits the whole image into the requested size at its own aspect ratio, without cropping or padding.
+        /// The result can be smaller than the requested size.
+        case fitWithinSize
+
+        /// The `fit` the CDN expects for this mode in the image edits.
+        fileprivate var cdnFit: String {
+            switch self {
+            case .fill: return "cover"
+            case .fit: return "contain"
+            case .fitWithinSize: return "inside"
+            }
+        }
     }
 }
 
