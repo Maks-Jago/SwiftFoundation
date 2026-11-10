@@ -98,13 +98,6 @@ public struct S3MediaResource: Codable, Sendable {
         """
         
         if let size = size {
-            let fit: String
-            switch resizeMode {
-            case .fill: fit = "cover"
-            case .fit: fit = "contain"
-            case .fitWithinSize: fit = "inside"
-            }
-
             jsonString.append(",")
             jsonString.append(
                 """
@@ -112,7 +105,7 @@ public struct S3MediaResource: Codable, Sendable {
                 "resize": {
                 "width": \(Int(size.width.rounded())),
                 "height": \(Int(size.height.rounded())),
-                "fit": "\(fit)",
+                "fit": "\(resizeMode.cdnFit)",
                 "background": { "r": 255, "g": 255, "b": 255, "alpha": 0 }
                 }
                 }
@@ -145,6 +138,15 @@ public extension S3MediaResource {
         /// Fits the whole image into the requested size at its own aspect ratio, without cropping or padding.
         /// The result can be smaller than the requested size.
         case fitWithinSize
+
+        /// The `fit` the CDN expects for this mode in the image edits.
+        fileprivate var cdnFit: String {
+            switch self {
+            case .fill: return "cover"
+            case .fit: return "contain"
+            case .fitWithinSize: return "inside"
+            }
+        }
     }
 }
 
