@@ -71,13 +71,20 @@ public struct S3MediaResource: Codable, Sendable {
     /// Retrieves a scaled image URL.
     /// - Parameters:
     ///   - resizeMode: How the image is resized to the target size, e.g. `.fitWithinSize` to keep the whole image at its own aspect ratio. Defaults to `.fit`.
-    ///   - size: The target size for image resizing. The size will be scaled with a device scale factor (e.g., `CGSize(width: 120, height: 120).scaledSize`).
+    ///   - size: The target size for image resizing. It will be multiplied by `scale`.
+    ///   - scale: The display scale, e.g. `displayScale` from the SwiftUI environment or `traitCollection.displayScale`
+    ///     of a UIKit view. It has no default value on purpose. If `nil`, the scale of the main screen of the device is used.
     /// - Returns: The scaled image URL (CDN, S3).
     /// - Throws: `MediaResourceError.invalidMediaURL` or `MediaResourceError.invalidCDNURL` if the URL is not valid.
-    public func scaledImageURL(_ resizeMode: ResizeMode = .fit, in size: CGSize) throws -> URL {
-        try _imageURL(resizeMode, in: size.scaledSize)
+    public func scaledImageURL(_ resizeMode: ResizeMode = .fit, in size: CGSize, scale: CGFloat?) throws -> URL {
+        try _imageURL(resizeMode, in: size.scaledSize(scale: scale))
     }
-    
+
+    @available(*, deprecated, message: "Use `scaledImageURL(_:in:scale:)` and pass the scale explicitly, or `nil` to use the scale of the main screen.")
+    public func scaledImageURL(_ resizeMode: ResizeMode = .fit, in size: CGSize) throws -> URL {
+        try scaledImageURL(resizeMode, in: size, scale: nil)
+    }
+
     /// Generates an image URL based on the resize mode and size.
     /// - Parameters:
     ///   - resizeMode: How the image is resized to the target size.
